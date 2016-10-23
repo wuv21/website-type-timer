@@ -14,3 +14,7 @@ h1, h2, h3 {
 #keyboardInp {
 	margin-bottom: 1em;
 }
+
+textarea {
+	width: 100%;
+}
