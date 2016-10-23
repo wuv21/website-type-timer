@@ -16,7 +16,7 @@ $(document).ready(function() {
 		var data = {
 			time: e.timeStamp,
 			keyCode: e.keyCode,
-			keyString: e.key
+			keyString: e.key ? e.key : e.keyCode
 		}
 
 		keysTime.push(data);
