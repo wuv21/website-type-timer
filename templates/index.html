@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Logger test</title>
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+
+	<script
+		src="https://code.jquery.com/jquery-2.2.4.min.js"
+		integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.16.6/lodash.min.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+	<div class="container text-center" id="start">
+		<button class="btn btn-primary btn-lg" id="startBtn">Start</button>
+	</div>
+
+	<div class="container test-display">
+		<p id="reqText">Press start to begin</p>
+		
+		<textarea name="keyboardInp" id="keyboardInp" class="form-control" autofocus="autofocus" disabled></textarea>
+	</div>
+
+	<div class="container stats text-right">
+		<p id="runs">0 of x</p>
+	</div>
+
+	<div class="container" id="fileDownload"></div>
+</body>
+</html>

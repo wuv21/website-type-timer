@@ -1,0 +1,60 @@
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic);
+
+body {
+    font-family: "Open Sans", Helvetica, sans-serif;
+    font-size: 18px;
+    padding-bottom: 1em;
+    width: 100%;
+}
+
+h1, h2, h3 {
+    font-weight: 300;
+}
+
+#keyboardInp {
+	margin-bottom: 1em;
+    padding-left: 0;
+    border: 1px solid #ddd;
+    box-shadow: none;
+    font-size: 18px;
+    color: #000;
+}
+
+#reqText {
+    margin-bottom: 1em;
+    border: 1px solid #fff;
+}
+
+.test-display {
+    margin-top: 2em;
+}
+
+#runs {
+    color: #ddd;
+}
+
+#start button {
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* flexbox beta */
+/*.container {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 2% 5% 2% 5%;
+}
+
+.container * {
+    width: 100%;
+}
+
+.btn {
+    width: auto;
+}
+
+a {
+    text-decoration: none;
+}*/
