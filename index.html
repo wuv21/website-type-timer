@@ -17,19 +17,14 @@
 </head>
 <body>
 	<div class="container">
-		<h2>Test input...</h2>
-		<p>Please type in the phrase <kbd>The quick brown fox jumps over the lazy dog</kbd></p>
-		<input name="keyboardInp" id="keyboardInp" class="form-control" placeholder="enter text here"></input>
+		<h2>Mobile Typing Test</h2>
+		<hr>
+		<p id="reqText">the quick brown fox jumps over the lazy dog</p>
+		<input name="keyboardInp" id="keyboardInp" class="form-control" autofocus="autofocus"></input>
 
 		<button class="btn btn-danger" id="resetInp">Reset</button>
-
-		<hr>
-		<h2>Results</h2>
-
-		<p>Parsed data - all times in milliseconds</p>
-		<p id="results"></div>
-
-
 	</div>
+
+	<div class="container" id="fileDownload"></div>
 </body>
 </html>
