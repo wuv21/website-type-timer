@@ -3,8 +3,8 @@ $(document).ready(function() {
 	var testLastChar = testString.charAt(testString.length - 1).toUpperCase();
 
 	var settings = {
-		test: 2,
-		total: 4
+		test: 0,
+		total: 2
 	}
 
 	var phrases = [];
@@ -50,27 +50,31 @@ $(document).ready(function() {
 
 	var keysTime = [];
 	$('#keyboardInp').keyup(function(e) {
-		var timeVanilla = Date.now();
-		var timeQuery = parseInt(e.timeStamp.toFixed(6));
 
-		var data = {
-			ticks: timeQuery,
-			seconds: timeQuery / 1000,
-			keyCode: e.keyCode,
-			keyString: e.key ? e.key : e.keyCode,
-			ticksVanilla: timeVanilla,
-			secondsVanilla: timeVanilla / 1000
+		// not shift key
+		if (e.keyCode != "16") {
+			var timeVanilla = Date.now();
+			var timeQuery = parseInt(e.timeStamp.toFixed(6));
+
+			var data = {
+				ticks: timeQuery,
+				seconds: timeQuery / 1000,
+				keyCode: e.keyCode ? e.keyCode : 8,
+				keyString: e.key != "Backspace" ? e.key : "&#x8;",
+				ticksVanilla: timeVanilla * 10000,
+				secondsVanilla: timeVanilla / 10000000
+			}
+
+			keysTime.push(data);
 		}
-
-		keysTime.push(data);
 
 		// when enter is pressed
 		if (e.keyCode == "13") {
 			tracker.results.push({
 				keysPressed: keysTime,
 				orgString: getCurrentText(),
-				compiledString: $(this).text(),
-				isTest: tracker.count <= settings.test
+				compiledString: $(this).val(),
+				isTest: tracker.count <= settings.test  	
 			});
 
 			tracker.count++
@@ -93,16 +97,6 @@ $(document).ready(function() {
 						console.log(e);
 					});
 			}
-
-			// var jsonExport = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(keysTime));
-
-			// var a = document.createElement('a');
-			// a.href = 'data:' + jsonExport;
-			// a.download = 'keysTime.json';
-			// a.innerHTML = 'download JSON';
-
-			// var container = document.getElementById('fileDownload');
-			// container.appendChild(a);
 		}
-	});
+	})
 });
