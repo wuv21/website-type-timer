@@ -12,9 +12,10 @@ def index():
 
 @app.route('/send_results', methods=['POST'])
 def send_results():
-    print('here')
-
     data = request.get_json(force=True)
+
+    pprint.pprint(data)
+    
     parsed = parse_data(data)
     export_xml(parsed)
 

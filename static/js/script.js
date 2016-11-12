@@ -56,6 +56,14 @@ $(document).ready(function() {
 			var timeVanilla = Date.now();
 			var timeQuery = parseInt(e.timeStamp.toFixed(6));
 
+			if (!e.key) {
+				if (e.keyCode == 8) {
+					e.key = "&#x8;"
+				} else {
+					e.key = String.fromCharCode(e.keyCode).toLowerCase();
+				}
+			}
+
 			var data = {
 				ticks: timeQuery,
 				seconds: timeQuery / 1000,
@@ -89,6 +97,8 @@ $(document).ready(function() {
 				$(this).prop('disabled', true);
 
 				console.log(tracker);
+
+				// change localhost to router IP
 
 				$.post('http://localhost:8080/send_results', JSON.stringify(tracker))
 					.success(function() {
