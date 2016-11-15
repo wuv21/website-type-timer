@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var testLastChar = testString.charAt(testString.length - 1).toUpperCase();
 
 	var settings = {
-		test: 0,
+		test: 1,
 		total: 2
 	}
 
@@ -19,7 +19,7 @@ $(document).ready(function() {
 	}
 
 	function setText(t) {
-		$('#reqText').text(t);
+		$('#reqText').text(t.toLowerCase());
 	}
 
 	function changeRuns(x) {
@@ -100,7 +100,7 @@ $(document).ready(function() {
 
 				// change localhost to router IP
 
-				$.post('http://localhost:8080/send_results', JSON.stringify(tracker))
+				$.post('http://69.91.136.254:8080/send_results', JSON.stringify(tracker))
 					.success(function() {
 						console.log("Data successfully sent");
 					}).error(function(e) {

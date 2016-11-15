@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, redirect, request
 import pprint
 from xml.etree.ElementTree import Element, SubElement, tostring, ElementTree
+import datetime
 
 app = Flask(__name__)
 pprint = pprint.PrettyPrinter(indent=4)
@@ -74,8 +75,16 @@ def export_xml(p):
         transcribed.text = x[3]
 
     tree = ElementTree(root)
-    tree.write('test.xml', encoding="utf-8")
-    with open('test.xml', 'r+') as xml_file:
+    current_date = datetime.datetime.now()
+    req_date_values = [current_date.month, current_date.day, current_date.hour, current_date.minute]
+
+    export_filename = str(req_date_values[0])
+
+    for i in range(1, len(req_date_values)):
+        export_filename += "-" + str(req_date_values[i])
+
+    tree.write(export_filename + '.xml', encoding="utf-8")
+    with open(export_filename + '.xml', 'r+') as xml_file:
         data = xml_file.read()
         xml_file.seek(0)
         data = data.replace('amp;', '')
