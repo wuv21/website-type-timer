@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 	var settings = {
 		test: 1,
-		total: 2
+		total: 3
 	}
 
 	var phrases = [];
@@ -82,7 +82,7 @@ $(document).ready(function() {
 				keysPressed: keysTime,
 				orgString: getCurrentText(),
 				compiledString: $(this).val(),
-				isTest: tracker.count <= settings.test  	
+				isTest: tracker.count < settings.test  	
 			});
 
 			tracker.count++
@@ -100,7 +100,7 @@ $(document).ready(function() {
 
 				// change localhost to router IP
 
-				$.post('http://69.91.136.254:8080/send_results', JSON.stringify(tracker))
+				$.post('http://192.168.1.124:8080/send_results', JSON.stringify(tracker))
 					.success(function() {
 						console.log("Data successfully sent");
 					}).error(function(e) {

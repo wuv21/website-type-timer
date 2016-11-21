@@ -2,6 +2,8 @@ from flask import Flask, render_template, url_for, redirect, request
 import pprint
 from xml.etree.ElementTree import Element, SubElement, tostring, ElementTree
 import datetime
+import json
+import os
 
 app = Flask(__name__)
 pprint = pprint.PrettyPrinter(indent=4)
@@ -15,7 +17,9 @@ def index():
 def send_results():
     data = request.get_json(force=True)
 
-    pprint.pprint(data)
+    raw_data_path = os.path.join('raw_data', str(int(datetime.datetime.now().timestamp())) + '.json')
+    with open(raw_data_path, 'w') as raw_file:
+        json.dump(data, raw_file)
     
     parsed = parse_data(data)
     export_xml(parsed)
@@ -40,7 +44,7 @@ def parse_data(data):
 
     for i, t in enumerate(data['results']):
         trial = {"number": str(i + 1),
-                "testing": str(t['isTest'] == "True").lower(),
+                "testing": str(t['isTest'] == True).lower(),
                 "entries": str(len(t['keysPressed']) - 1)}
         
         entries = []
@@ -76,15 +80,17 @@ def export_xml(p):
 
     tree = ElementTree(root)
     current_date = datetime.datetime.now()
-    req_date_values = [current_date.month, current_date.day, current_date.hour, current_date.minute]
+    req_date_values = [current_date.month, current_date.day, current_date.hour, format(current_date.minute, '02d')]
 
     export_filename = str(req_date_values[0])
 
     for i in range(1, len(req_date_values)):
         export_filename += "-" + str(req_date_values[i])
 
-    tree.write(export_filename + '.xml', encoding="utf-8")
-    with open(export_filename + '.xml', 'r+') as xml_file:
+    xml_path = os.path.join('xml', export_filename + '.xml')
+
+    tree.write(xml_path, encoding="utf-8")
+    with open(xml_path, 'r+') as xml_file:
         data = xml_file.read()
         xml_file.seek(0)
         data = data.replace('amp;', '')
