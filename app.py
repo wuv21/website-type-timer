@@ -57,10 +57,14 @@ def parse_data(data):
 
             entries.append(entry)
         
-        trials.append([trial,
-                        t['orgString'].replace('\r', ''),
-                        entries,
-                        t['compiledString'].replace('\n', '')])
+        try:
+	        trials.append([trial,
+	                        t['orgString'].replace('\r', ''),
+	                        entries,
+	                        t['compiledString'].replace('\n', '')])
+        except KeyError as e:
+        	print(e)
+        	print(trial)
 
     return [version, trials]
 

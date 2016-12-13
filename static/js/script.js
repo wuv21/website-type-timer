@@ -3,13 +3,14 @@ $(document).ready(function() {
 	var testLastChar = testString.charAt(testString.length - 1).toUpperCase();
 
 	var settings = {
-		test: 1,
-		total: 3
+		test: 3,
+		total: 20
 	}
 
 	var phrases = [];
 	$.get('../static/phrases/phrases2.txt', function(data) {
-		phrases = data.split('\n');
+		phrases = data.split('\n').slice(0, 500);
+		console.log(phrases);
 	});
 
 	var tracker = {
@@ -100,7 +101,7 @@ $(document).ready(function() {
 
 				// change localhost to router IP
 
-				$.post('http://192.168.1.124:8080/send_results', JSON.stringify(tracker))
+				$.post('http://localhost:8080/send_results', JSON.stringify(tracker))
 					.success(function() {
 						console.log("Data successfully sent");
 					}).error(function(e) {
